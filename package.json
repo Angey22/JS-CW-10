@@ -2,6 +2,7 @@
   "name": "js-cw-10",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "homepage": "https://Angey22.github.io/JS-CW-10",
   "scripts": {
     "start": "parcel src/*.html",
