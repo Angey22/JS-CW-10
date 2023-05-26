@@ -3,4 +3,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"PdcR":[function(require,module,exports) {
 "use strict";require("../css/common.css"),fetch("https://pokeapi.co/api/v2/pokemon/ditto").then(function(o){return o.json()}).then(console.log).catch(function(o){console.log(o)}),fetch("https://lpj-weather-service.herokuapp.com/weather?lat=39.916668&lon=116.383331").then(function(o){return o.json()}).then(console.log);
 },{"../css/common.css":"en75"}]},{},["PdcR"], null)
-//# sourceMappingURL=/JS-CW-10/02-cors.b7b86dcd.js.map
+//# sourceMappingURL=/JS-CW-10/02-cors.e211a19a.js.map
