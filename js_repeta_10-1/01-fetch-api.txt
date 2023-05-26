@@ -1,0 +1,265 @@
+//! Видео - 0:32:05...1:54:30
+
+// Импортируем в скрипт нужные элементы.
+import '../css/common.css';
+import pokemonCardTpl from '../templates/pokemon-card.hbs';
+
+
+/*
+ * - HTTP-запросы в браузере
+ *  - Fetch API
+ *  - Владка Network
+ *  - HTTP-методы
+ *  - Заголовки
+ *  - MIME-типы
+ *  - Параметры запроса
+ * - Документация REST API
+ * - Обработка 404 с fetch
+ * - Аутентификация
+ * - Библиотеки-обёртки
+ * - https://pokeapi.co/
+ */
+
+// "fetch()" - это встроенная в браузер функция, которая используется для формирования запросов на бек-енд. В ответ на такой запрос, бек-енд сервер возвращает промис.
+
+// Ориентировочная структура функции "fetch()":
+// function fetch(url) {
+//     return new Promise(...);
+// };
+//! "fetch()" - принимает в качестве аргумента ссылку на бек-енд сервис, и возвращает в ответ на запрос "промис".
+
+// Пример использования функции "fetch()" для получения данных с бек-енда.
+// fetch('https://pokeapi.co/api/v2/pokemon/2')
+//   .then(response => {
+//       return response.json()
+//   })
+//   .then(pokemon => {
+//       console.log(pokemon);
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+  // 1-й "then" нужен для дешифровки ответа от сервера.
+  // 2-й "then" нужен для получения набора данных описанного в документации сервиса.
+
+
+//!============================================================
+
+//! Обрабатываем полученные от сервера данные, трансформируя их в разметку на основе "hbs" шаблона.
+
+// Создаем ссылку на тег-<div> назодящийся в HTML документе.
+// const refs2 = {
+//   cardContainer: document.querySelector('.js-card-container'),
+// }
+
+// Формируем код запроса и сразу во вторм "then" - создаем разметку.
+// fetch('https://pokeapi.co/api/v2/pokemon/2')
+//   .then(response => {
+//       return response.json()
+//   })
+//   .then(pokemon => {
+//     console.log(pokemon);
+
+//     // Создаем разметку
+//     const murkup = pokemonCardTpl(pokemon);
+//     console.log(murkup);
+
+//     // Вешаем разметку в HTML документ
+//     refs2.cardContainer.innerHTML = murkup;
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+
+//!============================================================
+
+//! Чистим код, преобразовывая общий "fetch()" запрос в набор функций.
+
+// Создаем ссылку на тег-<div> назодящийся в HTML документе.
+// const refs2 = {
+//   cardContainer: document.querySelector('.js-card-container'),
+// }
+
+// Активируем код скрипта
+// fetchPokemon()
+//   .then(renderPokemonCard)
+//   .catch(error => console.log(error));
+
+// Функция запроса данных и их предварительной дешифрации.
+// function fetchPokemon() {
+//   return fetch('https://pokeapi.co/api/v2/pokemon/1')
+//     .then(response => {
+//       return response.json();
+//     });
+// }
+//! Данная функция в результате своей работы возвращает "промис".
+
+// Функция по созданию разметки и ее вставки в HTML.
+// function renderPokemonCard(pokemon) {
+//   const markup = pokemonCardTpl(pokemon);
+//   refs2.cardContainer.innerHTML = markup;
+// }
+
+//!============================================================
+
+//! Настраиваем наши функции для организации их динамической работы.
+
+// Создаем ссылку на тег-<div> назодящийся в HTML документе.
+// const refs2 = {
+//   cardContainer: document.querySelector('.js-card-container'),
+// }
+
+// Активируем код скрипта
+// fetchPokemon(3)
+//   .then(renderPokemonCard)
+//   .catch(error => console.log(error));
+//! Задаем функции "fetchPokemon([value])" в качестве параметра - "id" искомого пакемона.
+
+// Функция запроса данных и их предварительной дешифрации.
+// function fetchPokemon(pokemonId) {
+//   return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+//     .then(response => {
+//       return response.json();
+//     });
+// }
+//! Добавили возможность ввод переменной в функцию для возможности запроса информации по "id" искомого пакемона.
+
+// Функция по созданию разметки и ее вставки в HTML.
+// function renderPokemonCard(pokemon) {
+//   const markup = pokemonCardTpl(pokemon);
+//   refs2.cardContainer.innerHTML = markup;
+// }
+
+//!============================================================
+
+//! Настраиваем скрипт для работы с формой (поисковой строкой) и организацией динамического поиска нужной информации.
+
+// Создаем ссылку на тег-<div> и тег-<form> находящихся в HTML документе.
+// const refs3 = {
+//   cardContainer: document.querySelector('.js-card-container'),
+//   searchForm: document.querySelector('.js-search-form'),
+// }
+
+// "Вещаем" слушатель на форму, и по регистрации события 'submit' - активируем наш скрипт.
+// refs3.searchForm.addEventListener('submit', onSearch);
+
+// function onSearch(e) {
+//   // Блокируем перезагрузку страницы при сабмите формы.
+//   e.preventDefault();
+
+//   // Привязываемся через "event" к тегу-<form>.
+//   const form = e.currentTarget;
+  
+//   // Получаем значение введенное в тег-<input> с именем (name) - "query".
+//   const searchQuery = form.elements.query.value;
+  
+//   // Используем полученное из формы значение как аргумент, необходимый для динамической активации нашего скрипта. В "catch()" добавили функцию "onFetchError" для вывода пользователю информации об ошибке. Добавили "finally()" для очистки формы (очистки поисковой строки) после выполнения заданных операций, вне зависимости от результатов работы скрипта.
+//   fetchPokemon(searchQuery)
+//     .then(renderPokemonCard)
+//     .catch(onFetchError)
+//     .finally(() => form.reset());
+// }
+//! Создали новую функцию - колл-бек слушателя по событию 'submit' формы.
+
+// Функция запроса данных и их предварительной дешифрации.
+// function fetchPokemon(pokemonId) {
+//   //! Вынесли адресс ссылки в отдельную переменную.
+//   const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+
+//   return fetch(url)
+//     .then(response => {
+//       return response.json();
+//     });
+// }
+
+// Функция по созданию разметки и ее вставки в HTML.
+// function renderPokemonCard(pokemon) {
+//   const markup = pokemonCardTpl(pokemon);
+//   refs3.cardContainer.innerHTML = markup;
+// }
+
+//! Функция вывода ошибки пользователю.
+// function onFetchError(error) {
+//   alert('Упс, что-то пошло не так и мы не нашли вашего покемона!');
+// }
+
+//!============================================================
+
+//! Производим разделение кода скрипта. Выносим в отдельный JS файл "API" (функцию запроса информации с бекк-енда), и объект-ссылок на элементы находящиеся в HTML документе. 
+
+// Импортируем из других файлов переменные
+import API from './api-service';
+import getRefs from './get-refs';
+
+const refs = getRefs();
+
+refs.searchForm.addEventListener('submit', onSearch);
+
+function onSearch(e) {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+  const searchQuery = form.elements.query.value;
+
+  API.fetchPokemon(searchQuery)
+    .then(renderPokemonCard)
+    .catch(onFetchError)
+    .finally(() => form.reset());
+}
+
+function renderPokemonCard(pokemon) {
+  const markup = pokemonCardTpl(pokemon);
+  refs.cardContainer.innerHTML = markup;
+}
+
+function onFetchError(error) {
+  alert('Упс, что-то пошло не так и мы не нашли вашего покемона!');
+}
+
+//!============================================================
+
+//! Параметры запроса
+// Синтаксис запроса с заданными параметрами -"mysite.com/api/pokemon?имяПараметра=значениеПараметра&имяПараметра=значениеПараметра".
+// Параметры запроса встраиваемые в адресс ссылки-запроса (запроса на бекк-енд сервер), являются дополнительными настройками запроса к серверу, которые расширяют возможности получения от него данных и их предварительной обработки. Существование подобных дополнительных параметров зависят от настроек сервера. Нужно смотреть документацию и искать в ней описание дополнительных настроек к параметрам запросо.
+
+// Для сервиса с пакимонами см. документацию -> https://pokeapi.co/
+
+// Например, на сервиса с пакимонами существует доп. настройки с возможностью использования параметров: "limit" и "offset".
+
+//! Пример использования в ссылке-запросе доп. параметра "limit", который позволяет задать количество пакемонов, информацию о которых нужно вернуть.
+// Пример использования - "?limit=10".
+fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
+  .then(r => r.json())
+  .then(pakemon => console.log('Устанавливаем - "?limit=10" =>', pakemon));
+//! См. в консоли свойство объекта-ответа - "resalts", в котором находится массив с 10-ю элементами (10-ю объектами с пакемонами).
+
+// Пример использования - "?limit=50".
+fetch('https://pokeapi.co/api/v2/pokemon?limit=50')
+  .then(r => r.json())
+  .then(pakemon => console.log('Устанавливаем - "?limit=50" =>', pakemon));
+//! См. в консоли свойство объекта-ответа - "resalts", в котором находится массив с 50-ю элементами (50-ю объектами с пакемонами).
+
+// Без ввода параметра "limit" в запросе.
+fetch('https://pokeapi.co/api/v2/pokemon')
+  .then(r => r.json())
+  .then(pakemon => console.log('По умолчанию =>', pakemon));
+//! См. в консоли свойство объекта-ответа - "resalts", в котором находится массив с 20-ю элементами (20-ю объектами с пакемонами), это настройка сервера по умолчанию.
+
+// Пример использования другого сервиса (https://pixabay.com/api/docs/), с указанием в запросе параметров ключа авторизованного пользователя и настроек запрашиваемой информации.
+fetch('https://pixabay.com/api/?key=4823621-79205e21e56534e6ae2e472f&q=cat&image_type=vector&orientation=vertical')
+  .then(r => r.json())
+  .then(img => console.log(img));
+  //! Будет ошибка, т.к. ключ ("...key=4823621-79205e21e56534e6ae2e472f...") - не действителен
+
+
+// Пример еще одного сервиса (https://newsapi.org/docs/authentication), с использованием HTTP-заголовка в запросе.
+const url = 'https://newsapi.org/v2/everything?q=cars';
+const options = {
+  headers: {
+    Authorization: '4330ebfabc654a6992c2aa792f3173a3',
+  },
+};
+
+fetch(url, options)
+  .then(r => r.json())
+  .then(article => console.log(article));
