@@ -1,0 +1,102 @@
+<!-- Видео - 0:17:45...0:00:00 -->
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Search news</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      input {
+        padding: 10px 20px;
+        border-radius: 15px;
+        font-size: 30px;
+        border: 2px solid black;
+      }
+
+      input[type='submit'] {
+        background-color: rgb(25, 123, 221);
+        color: white;
+        cursor: pointer;
+      }
+
+      #articlesWrapper {
+        margin-top: 10px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      #loadMoreBtn {
+        display: block;
+        margin: 30px auto;
+        padding: 10px 20px;
+        border-radius: 15px;
+        font-size: 30px;
+        border: 2px solid black;
+        background-color: rgb(25, 123, 221);
+        color: white;
+        cursor: pointer;
+      }
+
+      #loadMoreBtn:disabled {
+        background-color: #c1c1c1;
+        cursor: not-allowed;
+      }
+
+      #loadMoreBtn.hidden {
+        display: none;
+      }
+
+      .aricle-card {
+        width: 30%;
+        text-align: center;
+        border-radius: 15px;
+        background-color: #c1c1c1;
+        padding: 20px;
+      }
+
+      .article-img {
+        width: 100%;
+        border-radius: 15px;
+      }
+
+      .article-link {
+        text-transform: uppercase;
+        border-radius: 15px;
+        display: inline-block;
+        text-decoration: none;
+        background-color: rgba(45, 45, 233, 0.731);
+        color: white;
+        padding: 10px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <a href="../index.html">На главную</a>
+      <em>/</em>
+      <a href="#" target="_blank">Исходники: "search_news.txt"</a>
+      <em>&</em>
+      <a href="#" target="_blank">"api.txt"</a>
+    </p>
+    <hr />
+
+    <form id="form">
+      <input type="text" name="news" placeholder="Search news" />
+      <input type="submit" value="Search" />
+    </form>
+
+    <div id="articlesWrapper"></div>
+
+    <button tupe="button" id="loadMoreBtn" disabled>Load more</button>
+
+    <script type="module" src="../js_simak_10-2/search_news.js"></script>
+  </body>
+</html>

@@ -1,3 +1,7 @@
+// "dd82ff3604224bf1b224da3ef75c9135" - ipy Key from Simaka;
+// "af0e766a1ccf475588965f28a4346fe4" - ipy Key from Leo;
+// "4330ebfabc654a6992c2aa792f3173a3" - ipy Key from Repeta.
+
 const API_KEY = '4330ebfabc654a6992c2aa792f3173a3';
 const BASE_URL = 'https://newsapi.org/v2';
 const options = {
